@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ayati's Forest Portfolio</title>
+ <!-- ✅ Load Roboto font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <style> 
+
+    :root {
+      --silk-blue: #3c9ecf;
+      --matte-green: #2b4738;
+    }
+
+    body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f8ff;
+  color: #222;
+  transition: background-color 1s ease;  /* Smooth fade */
+}
+
+
+    header {
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') no-repeat center center;
+      background-size: cover;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+
+    nav {
+      background-color: var(--matte-green);
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: var(--silk-blue);
+    }
+
+    .container {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .card {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 30px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      background-color: var(--silk-blue);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--matte-green);
+    }
+
+    footer {
+      background-color: var(--matte-green);
+      color: white;
+      padding: 10px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .card {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Ayati's Web World</h1>
+    <p id="typewriter"></p>
+
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Projects</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>About Me</h2>
+      <p>Hi! I’m Ayati, a 12-year-old learning to design websites. Now adding JavaScript fun!</p>
+    </div>
+
+    <div class="card">
+  <h2>Projects</h2>
+  <ul style="text-align: left;">
+    <li><a href="letssee.html" target="_blank">✔ javascript</a></li>
+    <li><a href="html.html" target="_blank">✔working paper </a></li>
+    <li><a href="AYATI.html" target="_blank">✔ forty</a></li>
+  </ul>
+</div>
+
+
+    <div class="card">
+      <h2>Change the Mood!</h2>
+      <p>Click the button to change the background 🎨</p>
+      <button onclick="changeBackground()">Change Background</button>
+    </div>
+
+    <div class="card">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:heyayati@gmail.com">heyayati@gmail.com</a></p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Ayati | Made with 💙 and 🌲
+  </footer>
+
+  <script>
+   const colors = [
+  "#e6f7ff", "#ffe6e6", "#e6ffe6", "#fff0f5", "#f0f0f0",
+  "#014d4e", "#2a3439", "#722f37", "#1c2b2d", "#ff6b6b",
+  "#00bcd4", "#fff176", "#7ed957", "#da70d6", "#f08080",
+  "#afeeee", "#fffacd", "#ffe4e1", "#eee8aa", "#00ffff",
+  "#ff69b4", "#b0e0e6", "#add8e6", "#c1f0dc", "#deb887",
+  "#8fbc8f", "#f5deb3", "#ffb6c1", "#a29bfe", "#ffe4b5",
+  "#98fb98", "#dcdcdc", "#e0ffff", "#ffdead", "#e9967a",
+  "#d8bfd8", "#fdf5e6", "#f0fff0", "#e6e6fa", "#ffd700",
+  "#90ee90", "#ffa07a", "#fafad2", "#ffe4c4", "#d2b48c",
+  "#f0e68c", "#e0b0ff", "#cfcfcf", "#40e0d0", "#ffcccb",
+  "#c6ecc6", "#d9d2e9"
+];
+
+
+  function changeBackground() {
+    const c = colors[Math.floor(Math.random() * colors.length)];
+    document.body.style.backgroundColor = c;
+  }
+</script>
+
+<script>
+  const text = "Nature-themed web designer in training 🌿";
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById("typewriter").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 60); // typing speed
+    }
+  }
+
+  window.onload = typeWriter;
+</script>
+
+
+</body>
+</html>
