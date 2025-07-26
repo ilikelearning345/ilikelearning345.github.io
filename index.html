@@ -2,65 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ayati's Forest Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #f0f8ff;
+      --silk-blue: #3c9ecf;
+      --matte-green: #2b4738;
     }
 
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background-color: var(--bg-color);
-      color: #2f2f2f;
-      transition: background-color 0.5s ease;
       margin: 0;
-      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f0f8ff;
+      color: #222;
+      transition: all 0.6s ease;
     }
 
-    .dark-mode {
-      --bg-color: #121212;
-      color: #f0f0f0;
-    }
-
-    header {
-      background-color: #88d8b0;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-      color: #fff;
-      text-shadow: 2px 2px 4px #000;
-    }
-
-    .card {
-      max-width: 700px;
-      margin: 30px auto;
-      background-color: #ffffffaa;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
-
-    .card button {
-      margin: 10px;
-      padding: 10px 20px;
-      font-size: 1em;
-      border: none;
+    .blog-post {
+      text-align: left;
+      margin-top: 20px;
+      padding: 10px;
+      border-left: 4px solid var(--silk-blue);
+      background-color: rgba(240, 248, 255, 0.5);
       border-radius: 8px;
-      cursor: pointer;
-      background-color: #a29bfe;
-      color: white;
-      transition: background-color 0.3s;
     }
 
-    .card button:hover {
-      background-color: #6c5ce7;
+    a:link {
+      color: blue;
+    }
+    a:visited {
+      color: green;
     }
 
     address {
@@ -73,117 +45,279 @@
       font-weight: bold;
     }
 
-    .fairy-mode {
-      background-image: linear-gradient(to bottom right, #fef6ff, #d8f3dc);
-      position: relative;
-      overflow: hidden;
+    .dark-mode .blog-post {
+      background-color: rgba(50, 50, 50, 0.8);
+      border-left-color: #7ed957;
     }
 
-    .fairy-mode .sparkle {
-      position: absolute;
+    header {
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') no-repeat center center;
+      background-size: cover;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+
+    nav {
+      background-color: var(--matte-green);
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: var(--silk-blue);
+    }
+
+    .container {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .card {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 30px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: all 0.5s ease;
+    }
+
+    button {
+      background-color: var(--silk-blue);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--matte-green);
+      transform: scale(1.05);
+    }
+
+    footer {
+      background-color: var(--matte-green);
+      color: white;
+      padding: 10px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .card {
+        width: 95%;
+      }
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+
+    .dark-mode .card {
+      background-color: #1e1e1e;
+      border-color: #333;
+      box-shadow: 0 0 15px rgba(255,255,255,0.05);
+    }
+
+    .dark-mode nav {
+      background-color: #333;
+    }
+
+    .dark-mode nav a:hover {
+      background-color: #555;
+    }
+
+    .dark-mode footer {
+      background-color: #333;
+    }
+
+    .sparkle {
+      position: fixed;
       width: 8px;
       height: 8px;
-      background: radial-gradient(circle, #fff, #ffb6f2);
+      background: white;
       border-radius: 50%;
       pointer-events: none;
-      animation: sparkle-fade 1s ease-out forwards;
+      animation: sparkleFade 0.8s linear forwards;
+      z-index: 9999;
+      box-shadow: 0 0 8px 4px white;
     }
 
-    @keyframes sparkle-fade {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(2); }
+    @keyframes sparkleFade {
+      from {
+        opacity: 1;
+        transform: scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: scale(1.8);
+      }
     }
 
-    .fairy-leaf {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      background: url('https://cdn-icons-png.flaticon.com/512/2909/2909763.png') no-repeat center center;
-      background-size: contain;
-      animation: floatLeaf 8s linear infinite;
+    .leaf {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/4/47/Leaf_icon_2.svg') no-repeat center center / contain;
+      animation: fall 6s linear infinite;
       pointer-events: none;
+      z-index: 9998;
     }
 
-    @keyframes floatLeaf {
-      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Ayati's Forest Portfolio</h1>
+    <h1>Ayati's Web World</h1>
+    <p id="typewriter"></p>
   </header>
 
-  <div class="card">
-    <p>Welcome to my magical coding forest! ✨</p>
-    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    <button onclick="changeBackground()">Change Background Color</button>
-    <button onclick="toggleFairyMode()">🧚 Fairy Mode</button>
-  </div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Projects</a>
+    <a href="#">Contact</a>
+  </nav>
 
-  <address>
-    Created with 🌸 by Ayati
-  </address>
+  <div class="container">
+    <div class="card">
+      <h2>About Me</h2>
+      <p>Hi! I’m Ayati, a 12-year-old learning to design websites. Now adding JavaScript fun!</p>
+    </div>
+
+    <div class="card">
+      <h2>Projects</h2>
+      <ul style="text-align: left;">
+        <li><a href="letssee.html" target="_blank">✔ javascript</a></li>
+        <li><a href="html.html" target="_blank">✔ working paper</a></li>
+        <li><a href="cssdoc.html" target="_blank">✔ forty</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Change the Mood!</h2>
+      <p>Click a button below to have some fun 🎨🌗</p>
+      <button onclick="changeBackground()">🎨 Change Background</button>
+      <button onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
+      <button onclick="startDiscoMode()">🪩 Disco Mode</button>
+      <button onclick="toggleFairyMode()">🧚 Fairy Mode</button>
+    </div>
+
+    <div class="card">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:heyayati@gmail.com">heyayati@gmail.com</a></p>
+    </div>
+
+    <div class="card">
+      <h2>My Blog 📝</h2>
+      <div class="blog-post">
+        <h3>🌿 July 26, 2025 – My Blog Post</h3>
+        <p>Today I added dark mode and color buttons to my website. It was so fun watching it come to life with just a few lines of JavaScript!</p>
+      </div>
+      <div class="blog-post">
+        <h3>🕸️ July 25, 2025 – I Published My Website!</h3>
+        <p>It finally worked! After fixing my file names and GitHub settings, I got my site live. Now I can share my projects with the world 🌍.</p>
+      </div>
+    </div>
+
+  <footer>
+    &copy; 2025 Ayati | Made with 💙 and 🌲
+  </footer>
 
   <script>
-    const colors = [
-      '#f0f8ff','#faebd7','#ffe4e1','#f5f5dc','#e6e6fa','#fff0f5','#f5fffa','#ffffe0',
-      '#f0fff0','#ffe4b5','#d8bfd8','#e0ffff','#fffacd','#d3ffce','#fbe7f6','#ccffcc',
-      '#ffefdb','#eedd82','#f0e68c','#b0e0e6','#ffdab9','#ffe4c4','#d2b48c','#f4a460',
-      '#ffcccb','#c1f0f6','#deb887','#f08080','#dda0dd','#c6e2ff','#ffc0cb','#ffb6c1',
-      '#b0c4de','#e9967a','#add8e6','#e0b0ff','#dcdcdc','#f5f5f5','#ffe5b4','#c8a2c8',
-      '#ff69b4','#db7093','#afeeee','#e6e200','#b19cd9','#f8c8dc','#7fffd4','#ff7f50'
-    ];
+    const colors = ["#e6f7ff", "#ffe6e6", "#e6ffe6", "#fff0f5", "#f0f0f0", "#014d4e", "#2a3439", "#722f37", "#1c2b2d"];
+
+    function changeBackground() {
+      const c = colors[Math.floor(Math.random() * colors.length)];
+      document.body.style.backgroundColor = c;
+    }
 
     function toggleDarkMode() {
       document.body.classList.toggle("dark-mode");
     }
 
-    function changeBackground() {
-      const c = colors[Math.floor(Math.random() * colors.length)];
-      document.documentElement.style.setProperty('--bg-color', c);
-    }
-
-    let fairyOn = false;
-
-    function toggleFairyMode() {
-      fairyOn = !fairyOn;
-      document.body.classList.toggle("fairy-mode", fairyOn);
-
-      if (fairyOn) {
-        document.addEventListener("mousemove", createSparkle);
-        createLeaves();
-      } else {
-        document.removeEventListener("mousemove", createSparkle);
-        document.querySelectorAll('.sparkle, .fairy-leaf').forEach(el => el.remove());
+    const text = "Nature-themed web designer in training 🌿";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 60);
       }
     }
+    window.onload = typeWriter;
 
-    function createSparkle(e) {
+    document.addEventListener("mousemove", function(e) {
+      if (!fairyMode) return;
       const sparkle = document.createElement("div");
       sparkle.className = "sparkle";
-      sparkle.style.left = `${e.clientX}px`;
-      sparkle.style.top = `${e.clientY}px`;
+      sparkle.style.left = `${e.pageX - 4}px`;
+      sparkle.style.top = `${e.pageY - 4}px`;
       document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 1000);
+      setTimeout(() => sparkle.remove(), 800);
+    });
+
+    function startDiscoMode() {
+      let discoInterval = setInterval(() => {
+        const bg = colors[Math.floor(Math.random() * colors.length)];
+        const textColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.backgroundColor = bg;
+        document.body.style.color = textColor;
+      }, 300);
+      setTimeout(() => clearInterval(discoInterval), 8000);
     }
 
-    function createLeaves() {
+    let fairyMode = false;
+    function toggleFairyMode() {
+      fairyMode = !fairyMode;
+      if (fairyMode) {
+        generateLeaves();
+      }
+    }
+
+    function generateLeaves() {
       for (let i = 0; i < 15; i++) {
         const leaf = document.createElement("div");
-        leaf.className = "fairy-leaf";
-        leaf.style.left = Math.random() * window.innerWidth + "px";
-        leaf.style.animationDuration = 5 + Math.random() * 5 + "s";
+        leaf.className = "leaf";
+        leaf.style.left = `${Math.random() * 100}vw`;
+        leaf.style.top = `-${Math.random() * 20}px`;
+        leaf.style.animationDuration = `${4 + Math.random() * 4}s`;
         document.body.appendChild(leaf);
-        setTimeout(() => leaf.remove(), 10000);
+        setTimeout(() => leaf.remove(), 6000);
       }
+      if (fairyMode) setTimeout(generateLeaves, 2000);
     }
   </script>
 </body>
 </html>
 
-      
     
    
  
