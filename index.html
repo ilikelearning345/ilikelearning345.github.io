@@ -18,6 +18,25 @@
       background-color: var(--bg-color);
       color: #222;
       transition: all 0.6s ease;
+      overflow-x: hidden;
+    }
+
+    .trail-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: var(--silk-blue);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.6;
+      animation: fadeOut 1s forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: scale(0.5);
+      }
     }
 
     .blog-post {
@@ -29,13 +48,8 @@
       border-radius: 8px;
     }
 
-    a:link {
-      color: blue;
-    }
-
-    a:visited {
-      color: green;
-    }
+    a:link { color: blue; }
+    a:visited { color: green; }
 
     address {
       font-style: normal;
@@ -45,11 +59,6 @@
       margin-top: 30px;
       text-shadow: 0 0 5px #a29bfe, 0 0 10px #cfcfcf;
       font-weight: bold;
-    }
-
-    .dark-mode .blog-post {
-      background-color: rgba(50, 50, 50, 0.8);
-      border-left-color: #7ed957;
     }
 
     header {
@@ -107,15 +116,10 @@
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 2em;
-      }
-      .card {
-        width: 95%;
-      }
+      header h1 { font-size: 2em; }
+      .card { width: 95%; }
     }
 
-    /* 🌑 Dark mode styles */
     body.dark-mode {
       --bg-color: #121212;
       color: #f5f5f5;
@@ -127,17 +131,9 @@
       box-shadow: 0 0 15px rgba(255,255,255,0.05);
     }
 
-    .dark-mode nav {
-      background-color: #333;
-    }
-
-    .dark-mode nav a:hover {
-      background-color: #555;
-    }
-
-    .dark-mode footer {
-      background-color: #333;
-    }
+    .dark-mode nav { background-color: #333; }
+    .dark-mode nav a:hover { background-color: #555; }
+    .dark-mode footer { background-color: #333; }
 
     button {
       background-color: var(--silk-blue);
@@ -158,7 +154,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <h1>Ayati's Web World</h1>
     <p id="typewriter"></p>
@@ -171,7 +166,6 @@
   </nav>
 
   <div class="container">
-
     <div class="card">
       <h2>About Me</h2>
       <p>Hi! I’m Ayati, a 12-year-old learning to design websites. Now adding JavaScript fun!</p>
@@ -194,12 +188,7 @@
     </div>
 
     <div class="card">
-      <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:heyayati@gmail.com">heyayati@gmail.com</a></p>
-    </div>
-
-    <div class="card">
-      <h2>💬 Send Me Feedback!</h2>
+      <h2>💬 Feedback</h2>
       <textarea id="feedback" rows="4" placeholder="Type your message here..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
       <br><br>
       <button onclick="submitFeedback()">📩 Submit Feedback</button>
@@ -218,7 +207,6 @@
         <p>It finally worked! After fixing my file names and GitHub settings, I got my site live. Now I can share my projects with the world 🌍.</p>
       </div>
     </div>
-
   </div>
 
   <footer>
@@ -226,22 +214,7 @@
   </footer>
 
   <script>
-    const colors = [
-      "#e6f7ff", "#ffe6e6", "#e6ffe6", "#fff0f5", "#f0f0f0",
-      "#014d4e", "#2a3439", "#722f37", "#1c2b2d", "#ff6b6b",
-      "#00bcd4", "#fff176", "#7ed957", "#da70d6", "#f08080",
-      "#afeeee", "#fffacd", "#ffe4e1", "#eee8aa", "#00ffff",
-      "#ff69b4", "#b0e0e6", "#add8e6", "#c1f0dc", "#deb887",
-      "#8fbc8f", "#f5deb3", "#ffb6c1", "#a29bfe", "#ffe4b5",
-      "#98fb98", "#dcdcdc", "#e0ffff", "#ffdead", "#e9967a",
-      "#d8bfd8", "#fdf5e6", "#f0fff0", "#e6e6fa", "#ffd700",
-      "#90ee90", "#ffa07a", "#fafad2", "#ffe4c4", "#d2b48c",
-      "#f0e68c", "#e0b0ff", "#cfcfcf", "#40e0d0", "#ffcccb",
-      "#f3e5f5", "#c8e6c9", "#b2dfdb", "#ffe0b2", "#c5cae9",
-      "#ffcdd2", "#e1bee7", "#d7ccc8", "#f8bbd0", "#dcedc8",
-      "#ffecb3", "#b3e5fc", "#dcf8c6", "#e1f5fe", "#fbe9e7",
-      "#fff3e0", "#fce4ec", "#ede7f6", "#e8f5e9", "#e0f7fa"
-    ];
+    const colors = ["#e6f7ff", "#ffe6e6", "#e6ffe6", "#fff0f5", "#f0f0f0", "#014d4e"];
 
     function changeBackground() {
       const c = colors[Math.floor(Math.random() * colors.length)];
@@ -261,7 +234,6 @@
         setTimeout(typeWriter, 60);
       }
     }
-
     window.onload = typeWriter;
 
     function submitFeedback() {
@@ -277,13 +249,19 @@
         document.getElementById("feedback").value = "";
       }
     }
+
+    document.addEventListener("mousemove", (e) => {
+      const dot = document.createElement("div");
+      dot.className = "trail-dot";
+      dot.style.left = `${e.pageX}px`;
+      dot.style.top = `${e.pageY}px`;
+      document.body.appendChild(dot);
+      setTimeout(() => dot.remove(), 1000);
+    });
   </script>
 
   <address>
     Designed by Ayati 🌿 | India
   </address>
-
 </body>
 </html>
-
-    
