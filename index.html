@@ -17,6 +17,7 @@
       background-color: #f0f8ff;
       color: #222;
       transition: all 0.6s ease;
+      overflow-x: hidden;
     }
 
     .blog-post {
@@ -28,12 +29,8 @@
       border-radius: 8px;
     }
 
-    a:link {
-      color: blue;
-    }
-    a:visited {
-      color: green;
-    }
+    a:link { color: blue; }
+    a:visited { color: green; }
 
     address {
       font-style: normal;
@@ -112,8 +109,6 @@
       background-color: var(--matte-green);
       transform: scale(1.05);
     }
-    </div>
-
 
     footer {
       background-color: var(--matte-green);
@@ -124,15 +119,10 @@
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 2em;
-      }
-      .card {
-        width: 95%;
-      }
+      header h1 { font-size: 2em; }
+      .card { width: 95%; }
     }
 
-    /* 🌑 Dark mode styles */
     body.dark-mode {
       background-color: #121212;
       color: #f5f5f5;
@@ -144,44 +134,26 @@
       box-shadow: 0 0 15px rgba(255,255,255,0.05);
     }
 
-    .dark-mode nav {
-      background-color: #333;
+    .dark-mode nav { background-color: #333; }
+    .dark-mode nav a:hover { background-color: #555; }
+    .dark-mode footer { background-color: #333; }
+
+    .sparkle {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparkleFade 0.8s linear forwards;
+      z-index: 9999;
+      box-shadow: 0 0 8px 4px white;
     }
 
-    .dark-mode nav a:hover {
-      background-color: #555;
+    @keyframes sparkleFade {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(1.8); }
     }
-
-    .dark-mode footer {
-      background-color: #333;
-    }
-
-   .sparkle {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-  pointer-events: none;
-  animation: sparkleFade 0.8s linear forwards;
-  z-index: 9999;
-  box-shadow: 0 0 8px 4px white;
-}
-
-
-@keyframes sparkleFade {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(1.8);
-  }
-}
-
-
-
   </style>
 </head>
 <body>
@@ -232,15 +204,13 @@
         <h3>🌿 July 26, 2025 – My Blog Post</h3>
         <p>Today I added dark mode and color buttons to my website. It was so fun watching it come to life with just a few lines of JavaScript!</p>
       </div>
-      
-
       <div class="blog-post">
         <h3>🕸️ July 25, 2025 – I Published My Website!</h3>
         <p>It finally worked! After fixing my file names and GitHub settings, I got my site live. Now I can share my projects with the world 🌍.</p>
       </div>
     </div>
 
-    
+  </div>
 
   <footer>
     &copy; 2025 Ayati | Made with 💙 and 🌲
@@ -281,17 +251,6 @@
     }
     window.onload = typeWriter;
 
-   document.addEventListener("mousemove", function(e) {
-  const sparkle = document.createElement("div");
-  sparkle.className = "sparkle";
-  sparkle.style.left = `${e.pageX}px`;
-  sparkle.style.top = `${e.pageY}px`;
-  document.body.appendChild(sparkle);
-  setTimeout(() => sparkle.remove(), 800);
-});
-
-
-
     function startDiscoMode() {
       let discoInterval = setInterval(() => {
         const bg = colors[Math.floor(Math.random() * colors.length)];
@@ -302,9 +261,23 @@
 
       setTimeout(() => clearInterval(discoInterval), 8000);
     }
-    
-   
+
+    // Sparkle mouse trail
+    document.addEventListener("mousemove", function(e) {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = `${e.pageX}px`;
+      sparkle.style.top = `${e.pageY}px`;
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 800);
+    });
+  </script>
 
 </body>
 </html>
 
+
+    
+    
+    
+       
