@@ -115,6 +115,13 @@
     background-color: var(--matte-green);
     transform: scale(1.05);
   }
+<div class="card">
+  <h2>💬 Send Me Feedback!</h2>
+  <textarea id="feedback" rows="4" placeholder="Type your message here..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+  <br><br>
+  <button onclick="submitFeedback()">📩 Submit Feedback</button>
+  <p id="feedback-response" style="margin-top: 10px; font-weight: bold;"></p>
+</div>
 
   footer {
     background-color: var(--matte-green);
@@ -156,6 +163,23 @@
   .dark-mode footer {
     background-color: #333;
   }
+     button {
+  background-color: var(--silk-blue);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: var(--matte-green);
+  transform: scale(1.05);
+}
+
 </style>
 
 </head>
@@ -256,6 +280,21 @@
   }
 
   window.onload = typeWriter;
+
+         function submitFeedback() {
+  const feedback = document.getElementById("feedback").value.trim();
+  const response = document.getElementById("feedback-response");
+
+  if (feedback.length < 5) {
+    response.innerText = "Please write a bit more 🌱";
+    response.style.color = "red";
+  } else {
+    response.innerText = "Thank you for your feedback! 🌟";
+    response.style.color = "green";
+    document.getElementById("feedback").value = "";
+  }
+}
+
 </script>
 
 <address>
