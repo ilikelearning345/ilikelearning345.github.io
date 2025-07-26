@@ -262,15 +262,15 @@
       setTimeout(() => clearInterval(discoInterval), 8000);
     }
 
-    // Sparkle mouse trail
     document.addEventListener("mousemove", function(e) {
-      const sparkle = document.createElement("div");
-      sparkle.className = "sparkle";
-      sparkle.style.left = `${e.pageX}px`;
-      sparkle.style.top = `${e.pageY}px`;
-      document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 800);
-    });
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+  sparkle.style.left = `${e.pageX - 4}px`; // Adjust for sparkle width (half of 8px)
+  sparkle.style.top = `${e.pageY - 4}px`;  // Adjust for sparkle height
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 800);
+});
+
   </script>
 
 </body>
