@@ -219,14 +219,15 @@
     }
 
     function drawTrail(e) {
-      const dot = document.createElement("div");
-      dot.className = "trail-dot";
-      dot.style.left = `${e.pageX}px`;
-      dot.style.top = `${e.pageY}px`;
-      dot.style.backgroundColor = trailColor;
-      document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 600);
-    }
+  const dot = document.createElement("div");
+  dot.className = "trail-dot";
+  dot.style.left = `${e.clientX - 4}px`; // Center the dot horizontally
+  dot.style.top = `${e.clientY - 4}px`;  // Center the dot vertically
+  dot.style.backgroundColor = trailColor;
+  document.body.appendChild(dot);
+  setTimeout(() => dot.remove(), 500);
+}
+
 
     trailColorPicker.addEventListener("input", (e) => {
       trailColor = e.target.value;
