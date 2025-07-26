@@ -20,33 +20,6 @@
       overflow-x: hidden;
     }
 
-    .blog-post {
-      text-align: left;
-      margin-top: 20px;
-      padding: 10px;
-      border-left: 4px solid var(--silk-blue);
-      background-color: rgba(240, 248, 255, 0.5);
-      border-radius: 8px;
-    }
-
-    a:link { color: blue; }
-    a:visited { color: green; }
-
-    address {
-      font-style: normal;
-      color: #a29bfe;
-      font-size: 1em;
-      text-align: center;
-      margin-top: 30px;
-      text-shadow: 0 0 5px #a29bfe, 0 0 10px #cfcfcf;
-      font-weight: bold;
-    }
-
-    .dark-mode .blog-post {
-      background-color: rgba(50, 50, 50, 0.8);
-      border-left-color: #7ed957;
-    }
-
     header {
       background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') no-repeat center center;
       background-size: cover;
@@ -118,26 +91,57 @@
       text-align: center;
     }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 2em; }
-      .card { width: 95%; }
+    .blog-post {
+      text-align: left;
+      margin-top: 20px;
+      padding: 10px;
+      border-left: 4px solid var(--silk-blue);
+      background-color: rgba(240, 248, 255, 0.5);
+      border-radius: 8px;
     }
 
-    body.dark-mode {
+    a:link {
+      color: blue;
+    }
+    a:visited {
+      color: green;
+    }
+
+    address {
+      font-style: normal;
+      color: #a29bfe;
+      font-size: 1em;
+      text-align: center;
+      margin-top: 30px;
+      text-shadow: 0 0 5px #a29bfe, 0 0 10px #cfcfcf;
+      font-weight: bold;
+    }
+
+    /* 🌑 Dark mode */
+    .dark-mode {
       background-color: #121212;
       color: #f5f5f5;
     }
-
     .dark-mode .card {
       background-color: #1e1e1e;
       border-color: #333;
       box-shadow: 0 0 15px rgba(255,255,255,0.05);
     }
+    .dark-mode nav {
+      background-color: #333;
+    }
+    .dark-mode nav a:hover {
+      background-color: #555;
+    }
+    .dark-mode footer {
+      background-color: #333;
+    }
+    .dark-mode .blog-post {
+      background-color: rgba(50, 50, 50, 0.8);
+      border-left-color: #7ed957;
+    }
 
-    .dark-mode nav { background-color: #333; }
-    .dark-mode nav a:hover { background-color: #555; }
-    .dark-mode footer { background-color: #333; }
-
+    /* ✨ Sparkle */
     .sparkle {
       position: fixed;
       width: 8px;
@@ -151,8 +155,41 @@
     }
 
     @keyframes sparkleFade {
-      from { opacity: 1; transform: scale(1); }
-      to { opacity: 0; transform: scale(1.8); }
+      from {
+        opacity: 1;
+        transform: scale(1);
+      }
+      to {
+        opacity: 0;
+        transform: scale(1.8);
+      }
+    }
+
+    /* 🍃 Leaves */
+    .leaf {
+      position: fixed;
+      top: -20px;
+      width: 20px;
+      height: 20px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/7657/7657374.png');
+      background-size: cover;
+      animation: fall 5s linear infinite;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .card {
+        width: 95%;
+      }
     }
   </style>
 </head>
@@ -191,6 +228,7 @@
       <button onclick="changeBackground()">🎨 Change Background</button>
       <button onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
       <button onclick="startDiscoMode()">🪩 Disco Mode</button>
+      <button onclick="toggleFairyMode()">🧚 Fairy Mode</button>
     </div>
 
     <div class="card">
@@ -204,6 +242,7 @@
         <h3>🌿 July 26, 2025 – My Blog Post</h3>
         <p>Today I added dark mode and color buttons to my website. It was so fun watching it come to life with just a few lines of JavaScript!</p>
       </div>
+
       <div class="blog-post">
         <h3>🕸️ July 25, 2025 – I Published My Website!</h3>
         <p>It finally worked! After fixing my file names and GitHub settings, I got my site live. Now I can share my projects with the world 🌍.</p>
@@ -240,6 +279,16 @@
       document.body.classList.toggle("dark-mode");
     }
 
+    function startDiscoMode() {
+      let discoInterval = setInterval(() => {
+        const bg = colors[Math.floor(Math.random() * colors.length)];
+        const textColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.backgroundColor = bg;
+        document.body.style.color = textColor;
+      }, 300);
+      setTimeout(() => clearInterval(discoInterval), 8000);
+    }
+
     const text = "Nature-themed web designer in training 🌿";
     let i = 0;
     function typeWriter() {
@@ -251,28 +300,39 @@
     }
     window.onload = typeWriter;
 
-    function startDiscoMode() {
-      let discoInterval = setInterval(() => {
-        const bg = colors[Math.floor(Math.random() * colors.length)];
-        const textColor = colors[Math.floor(Math.random() * colors.length)];
-        document.body.style.backgroundColor = bg;
-        document.body.style.color = textColor;
-      }, 300);
+    // ✨ Sparkle trail
+    let fairyMode = false;
+    document.addEventListener("mousemove", function(e) {
+      if (!fairyMode) return;
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.style.left = (e.pageX - 4) + "px";
+      sparkle.style.top = (e.pageY - 4) + "px";
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 800);
+    });
 
-      setTimeout(() => clearInterval(discoInterval), 8000);
+    // 🍃 Falling leaves
+    function createLeaf() {
+      if (!fairyMode) return;
+      const leaf = document.createElement("div");
+      leaf.className = "leaf";
+      leaf.style.left = Math.random() * window.innerWidth + "px";
+      leaf.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.body.appendChild(leaf);
+      setTimeout(() => leaf.remove(), 8000);
     }
 
-    document.addEventListener("mousemove", function(e) {
-  const sparkle = document.createElement("div");
-  sparkle.className = "sparkle";
-  sparkle.style.left = `${e.pageX - 4}px`; // Adjust for sparkle width (half of 8px)
-  sparkle.style.top = `${e.pageY - 4}px`;  // Adjust for sparkle height
-  document.body.appendChild(sparkle);
-  setTimeout(() => sparkle.remove(), 800);
-});
+    setInterval(() => {
+      if (fairyMode) createLeaf();
+    }, 600);
 
+    // Toggle Fairy Mode
+    function toggleFairyMode() {
+      fairyMode = !fairyMode;
+      document.body.classList.toggle("fairy-mode", fairyMode);
+    }
   </script>
-
 </body>
 </html>
 
