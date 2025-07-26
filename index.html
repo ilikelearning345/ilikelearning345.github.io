@@ -4,215 +4,122 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ayati's Forest Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --silk-blue: #3c9ecf;
-      --matte-green: #2b4738;
-    }
-
     body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to right, #e0ffe0, #ffffff);
+      color: #333;
       margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background-color: #f0f8ff;
-      color: #222;
-      transition: all 0.6s ease;
-    }
-
-    .blog-post {
-      text-align: left;
-      margin-top: 20px;
-      padding: 10px;
-      border-left: 4px solid var(--silk-blue);
-      background-color: rgba(240, 248, 255, 0.5);
-      border-radius: 8px;
-    }
-
-    a:link { color: blue; }
-    a:visited { color: green; }
-
-    address {
-      font-style: normal;
-      color: #a29bfe;
-      font-size: 1em;
-      text-align: center;
-      margin-top: 30px;
-      text-shadow: 0 0 5px #a29bfe, 0 0 10px #cfcfcf;
-      font-weight: bold;
-    }
-
-    .dark-mode .blog-post {
-      background-color: rgba(50, 50, 50, 0.8);
-      border-left-color: #7ed957;
-    }
-
-    header {
-      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') no-repeat center center;
-      background-size: cover;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 2.5em;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    }
-
-    nav {
-      background-color: var(--matte-green);
-      text-align: center;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 14px 20px;
-      display: inline-block;
-    }
-
-    nav a:hover {
-      background-color: var(--silk-blue);
+      padding: 0;
+      overflow-x: hidden;
+      transition: background 0.5s, color 0.5s;
     }
 
     .container {
-      padding: 40px 20px;
+      padding: 20px;
+    }
+
+    h1, h2 {
       text-align: center;
+      color: #4CAF50;
     }
 
     .card {
-      background-color: white;
-      border: 1px solid #ccc;
-      padding: 30px;
+      background: #f0fff0;
+      border-radius: 15px;
+      padding: 20px;
       margin: 20px auto;
-      width: 90%;
-      max-width: 600px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      transition: all 0.5s ease;
+      max-width: 700px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: background 0.5s;
     }
 
     button {
-      background-color: var(--silk-blue);
-      color: white;
+      margin: 5px;
+      padding: 10px 15px;
       border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
+      border-radius: 10px;
       cursor: pointer;
-      font-size: 16px;
-      margin: 10px;
-      transition: background-color 0.3s, transform 0.3s;
+      background-color: #90ee90;
+      color: #333;
+      font-weight: bold;
+      transition: background-color 0.3s;
     }
 
     button:hover {
-      background-color: var(--matte-green);
-      transform: scale(1.05);
+      background-color: #76c776;
     }
 
-    footer {
-      background-color: var(--matte-green);
-      color: white;
-      padding: 10px;
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    @media (max-width: 600px) {
-      header h1 { font-size: 2em; }
-      .card { width: 95%; }
-    }
-
-    body.dark-mode {
-      background-color: #121212;
+    .dark-mode {
+      background: #1e1e1e;
       color: #f5f5f5;
     }
 
     .dark-mode .card {
-      background-color: #1e1e1e;
-      border-color: #333;
-      box-shadow: 0 0 15px rgba(255,255,255,0.05);
+      background: #2e2e2e;
     }
 
-    .dark-mode nav { background-color: #333; }
-    .dark-mode nav a:hover { background-color: #555; }
-    .dark-mode footer { background-color: #333; }
-
     .sparkle {
-      position: fixed;
+      position: absolute;
       width: 8px;
       height: 8px;
-      background: white;
+      background: pink;
       border-radius: 50%;
       pointer-events: none;
-      animation: sparkleFade 0.8s linear forwards;
-      z-index: 9999;
-      box-shadow: 0 0 8px 4px white;
+      animation: sparkleFade 1s ease-out forwards;
     }
 
     @keyframes sparkleFade {
-      from { opacity: 1; transform: scale(1); }
-      to { opacity: 0; transform: scale(1.8); }
+      to {
+        transform: scale(1.5);
+        opacity: 0;
+      }
     }
 
     .leaf {
-      position: fixed;
+      position: absolute;
+      top: -20px;
       width: 20px;
       height: 20px;
-      background: url('https://cdn-icons-png.flaticon.com/512/415/415733.png') no-repeat center center/contain;
+      background: url('https://cdn-icons-png.flaticon.com/512/2909/2909764.png') no-repeat center/contain;
+      animation: fall 5s linear infinite;
       pointer-events: none;
-      animation: floatLeaf 4s linear infinite;
-      z-index: 9998;
+      z-index: 9999;
     }
 
-    @keyframes floatLeaf {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     .trail-dot {
       position: fixed;
-      width: 6px;
-      height: 6px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       pointer-events: none;
       z-index: 9998;
-      box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
-      animation: fadeTrail 0.6s linear forwards;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+      animation: fadeTrail 0.6s ease-out forwards;
     }
 
     @keyframes fadeTrail {
-      from { opacity: 1; transform: scale(1); }
-      to { opacity: 0; transform: scale(1.5); }
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.8);
+      }
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>Ayati's Web World</h1>
-    <p id="typewriter"></p>
-  </header>
-
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Projects</a>
-    <a href="#">Contact</a>
-  </nav>
-
   <div class="container">
-    <div class="card">
-      <h2>About Me</h2>
-      <p>Hi! I’m Ayati, a 12-year-old learning to design websites. Now adding JavaScript fun!</p>
-    </div>
-
-    <div class="card">
-      <h2>Projects</h2>
-      <ul style="text-align: left;">
-        <li><a href="letssee.html" target="_blank">✔ javascript</a></li>
-        <li><a href="html.html" target="_blank">✔ working paper</a></li>
-        <li><a href="cssdoc.html" target="_blank">✔ forty</a></li>
-      </ul>
-    </div>
+    <h1>Ayati's Forest Portfolio</h1>
 
     <div class="card">
       <h2>Change the Mood!</h2>
@@ -220,116 +127,93 @@
       <button onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
       <button onclick="startDiscoMode()">🪩 Disco Mode</button>
       <button onclick="toggleFairyMode()">🧚 Fairy Mode</button>
-      <button onclick="toggleTrailMode()">🎨 Trail Mode</button>
-      <br/>
+      <button onclick="toggleTrailMode()">🎨 Trail Mode</button><br>
       <input type="color" id="trailColorPicker" value="#ff69b4" style="margin-top:10px; display:none;" />
     </div>
 
     <div class="card">
-      <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:heyayati@gmail.com">heyayati@gmail.com</a></p>
+      <h2>About Me</h2>
+      <p>Hello! I'm Ayati, and I love building websites, drawing nature, and dreaming up magical worlds. 🌸</p>
     </div>
 
     <div class="card">
-      <h2>My Blog 📝</h2>
-      <div class="blog-post">
-        <h3>🌿 July 26, 2025 – My Blog Post</h3>
-        <p>Today I added dark mode and color buttons to my website. It was so fun watching it come to life with just a few lines of JavaScript!</p>
-      </div>
-      <div class="blog-post">
-        <h3>🕸️ July 25, 2025 – I Published My Website!</h3>
-        <p>It finally worked! After fixing my file names and GitHub settings, I got my site live. Now I can share my projects with the world 🌍.</p>
-      </div>
+      <h2>My Projects</h2>
+      <ul>
+        <li>🌳 Forest-Themed Website</li>
+        <li>🖌️ Online Art Gallery</li>
+        <li>🌟 Fairy Trail Cursor Effects</li>
+      </ul>
     </div>
   </div>
 
-  <footer>&copy; 2025 Ayati | Made with 💙 and 🌲</footer>
-
   <script>
-    const colors = [ "#e6f7ff", "#ffe6e6", "#e6ffe6", "#fff0f5", "#f0f0f0", "#014d4e", "#2a3439", "#722f37", "#1c2b2d", "#ff6b6b", "#00bcd4", "#fff176", "#7ed957", "#da70d6", "#f08080", "#afeeee", "#fffacd", "#ffe4e1", "#eee8aa", "#00ffff", "#ff69b4", "#b0e0e6", "#add8e6", "#c1f0dc", "#deb887", "#8fbc8f", "#f5deb3", "#ffb6c1", "#a29bfe", "#ffe4b5", "#98fb98", "#dcdcdc", "#e0ffff", "#ffdead", "#e9967a", "#d8bfd8", "#fdf5e6", "#f0fff0", "#e6e6fa", "#ffd700", "#90ee90", "#ffa07a", "#fafad2", "#ffe4c4", "#d2b48c", "#f0e68c", "#e0b0ff", "#cfcfcf", "#40e0d0", "#ffcccb", "#c6ecc6", "#d9d2e9", "#EFEBD8"];
-
+    let currentColor = 0;
+    const colors = ["#e0ffe0", "#ffe0f0", "#e0f7ff", "#fff0e0"];
     function changeBackground() {
-      const c = colors[Math.floor(Math.random() * colors.length)];
-      document.body.style.backgroundColor = c;
+      currentColor = (currentColor + 1) % colors.length;
+      document.body.style.background = colors[currentColor];
     }
 
     function toggleDarkMode() {
       document.body.classList.toggle("dark-mode");
     }
 
-    const text = "Nature-themed web designer in training 🌿";
-    let i = 0;
-    function typeWriter() {
-      if (i < text.length) {
-        document.getElementById("typewriter").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 60);
-      }
-    }
-    window.onload = typeWriter;
-
     function startDiscoMode() {
-      let discoInterval = setInterval(() => {
-        const bg = colors[Math.floor(Math.random() * colors.length)];
-        const textColor = colors[Math.floor(Math.random() * colors.length)];
-        document.body.style.backgroundColor = bg;
-        document.body.style.color = textColor;
+      let i = 0;
+      const discoColors = ["#ff1493", "#7fffd4", "#ffd700", "#da70d6"];
+      const interval = setInterval(() => {
+        document.body.style.background = discoColors[i % discoColors.length];
+        i++;
+        if (i > 10) clearInterval(interval);
       }, 300);
-      setTimeout(() => clearInterval(discoInterval), 8000);
     }
 
-    // FAIRY MODE
     let fairyModeOn = false;
-    let leafInterval;
-
     function toggleFairyMode() {
       fairyModeOn = !fairyModeOn;
       if (fairyModeOn) {
-        document.addEventListener("mousemove", sparkleTrail);
-        leafInterval = setInterval(spawnLeaf, 700);
+        document.addEventListener("mousemove", createSparkle);
+        startLeaves();
       } else {
-        document.removeEventListener("mousemove", sparkleTrail);
-        clearInterval(leafInterval);
-        document.querySelectorAll(".sparkle, .leaf").forEach(e => e.remove());
+        document.removeEventListener("mousemove", createSparkle);
+        document.querySelectorAll(".sparkle").forEach(s => s.remove());
+        document.querySelectorAll(".leaf").forEach(l => l.remove());
       }
     }
 
-    function sparkleTrail(e) {
+    function createSparkle(e) {
       const sparkle = document.createElement("div");
       sparkle.className = "sparkle";
-      sparkle.style.left = `${e.pageX - 4}px`;
-      sparkle.style.top = `${e.pageY - 4}px`;
+      sparkle.style.left = `${e.pageX}px`;
+      sparkle.style.top = `${e.pageY}px`;
       document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 800);
+      setTimeout(() => sparkle.remove(), 1000);
     }
 
-    function spawnLeaf() {
-      const leaf = document.createElement("div");
-      leaf.className = "leaf";
-      leaf.style.left = `${Math.random() * window.innerWidth}px`;
-      leaf.style.top = `-30px`;
-      document.body.appendChild(leaf);
-      setTimeout(() => leaf.remove(), 5000);
+    function startLeaves() {
+      for (let i = 0; i < 15; i++) {
+        const leaf = document.createElement("div");
+        leaf.className = "leaf";
+        leaf.style.left = `${Math.random() * 100}vw`;
+        leaf.style.animationDelay = `${Math.random() * 5}s`;
+        leaf.style.opacity = Math.random();
+        document.body.appendChild(leaf);
+      }
     }
 
-    // TRAIL MODE
+    // Trail Mode
     let trailModeOn = false;
     let trailColor = "#ff69b4";
-    const trailPicker = document.getElementById("trailColorPicker");
-
-    trailPicker.addEventListener("input", (e) => {
-      trailColor = e.target.value;
-    });
+    const trailColorPicker = document.getElementById("trailColorPicker");
 
     function toggleTrailMode() {
       trailModeOn = !trailModeOn;
-
       if (trailModeOn) {
         document.addEventListener("mousemove", drawTrail);
-        trailPicker.style.display = "inline-block";
+        trailColorPicker.style.display = "inline-block";
       } else {
         document.removeEventListener("mousemove", drawTrail);
-        trailPicker.style.display = "none";
+        trailColorPicker.style.display = "none";
         document.querySelectorAll(".trail-dot").forEach(dot => dot.remove());
       }
     }
@@ -341,10 +225,13 @@
       dot.style.top = `${e.pageY}px`;
       dot.style.backgroundColor = trailColor;
       document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 600);
+      setTimeout(() => dot.remove(), 700);
     }
-  </script>
 
+    trailColorPicker.addEventListener("input", (e) => {
+      trailColor = e.target.value;
+    });
+  </script>
 </body>
 </html>
 
