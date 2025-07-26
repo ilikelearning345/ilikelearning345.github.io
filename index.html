@@ -20,6 +20,13 @@
     color: #222;
     transition: all 0.6s ease;
   }
+<div class="card">
+  <h2>💬 Send Me Feedback!</h2>
+  <textarea id="feedback" rows="4" placeholder="Type your message here..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+  <br><br>
+  <button onclick="submitFeedback()">📩 Submit Feedback</button>
+  <p id="feedback-response" style="margin-top: 10px; font-weight: bold;"></p>
+</div>
 
   .blog-post {
     text-align: left;
@@ -99,28 +106,6 @@
     transition: all 0.5s ease;
   }
 
-  button {
-    background-color: var(--silk-blue);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 10px;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-
-  button:hover {
-    background-color: var(--matte-green);
-    transform: scale(1.05);
-  }
-<div class="card">
-  <h2>💬 Send Me Feedback!</h2>
-  <textarea id="feedback" rows="4" placeholder="Type your message here..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
-  <br><br>
-  <button onclick="submitFeedback()">📩 Submit Feedback</button>
-  <p id="feedback-response" style="margin-top: 10px; font-weight: bold;"></p>
 </div>
 
   footer {
@@ -292,6 +277,19 @@ button:hover {
     response.innerText = "Thank you for your feedback! 🌟";
     response.style.color = "green";
     document.getElementById("feedback").value = "";
+  }
+}
+function submitFeedback() {
+  const feedback = document.getElementById("feedback").value.trim();
+  const response = document.getElementById("feedback-response");
+
+  if (feedback === "") {
+    response.innerText = "Please type something!";
+    response.style.color = "red";
+  } else {
+    response.innerText = "Thanks for your feedback! 🌟";
+    response.style.color = "green";
+    document.getElementById("feedback").value = ""; // clear box
   }
 }
 
