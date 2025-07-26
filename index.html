@@ -274,14 +274,14 @@
     }
     window.onload = typeWriter;
 
-    document.addEventListener("mousemove", function(e) {
-      const trail = document.createElement("div");
-      trail.className = "trail";
-      trail.style.left = `${e.pageX}px`;
-      trail.style.top = `${e.pageY}px`;
-      document.body.appendChild(trail);
-      setTimeout(() => trail.remove(), 500);
-    });
+   document.addEventListener("mousemove", function(e) {
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+  sparkle.style.left = `${e.pageX}px`;
+  sparkle.style.top = `${e.pageY}px`;
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 800);
+});
 
     function startDiscoMode() {
       let discoInterval = setInterval(() => {
