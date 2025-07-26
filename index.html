@@ -28,12 +28,8 @@
       border-radius: 8px;
     }
 
-    a:link {
-      color: blue;
-    }
-    a:visited {
-      color: green;
-    }
+    a:link { color: blue; }
+    a:visited { color: green; }
 
     address {
       font-style: normal;
@@ -43,11 +39,6 @@
       margin-top: 30px;
       text-shadow: 0 0 5px #a29bfe, 0 0 10px #cfcfcf;
       font-weight: bold;
-    }
-
-    .dark-mode .blog-post {
-      background-color: rgba(50, 50, 50, 0.8);
-      border-left-color: #7ed957;
     }
 
     header {
@@ -93,7 +84,6 @@
       max-width: 600px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      transition: all 0.5s ease;
     }
 
     button {
@@ -105,12 +95,10 @@
       cursor: pointer;
       font-size: 16px;
       margin: 10px;
-      transition: background-color 0.3s, transform 0.3s;
     }
 
     button:hover {
       background-color: var(--matte-green);
-      transform: scale(1.05);
     }
 
     footer {
@@ -122,15 +110,11 @@
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 2em;
-      }
-      .card {
-        width: 95%;
-      }
+      header h1 { font-size: 2em; }
+      .card { width: 95%; }
     }
 
-    body.dark-mode {
+    .dark-mode {
       background-color: #121212;
       color: #f5f5f5;
     }
@@ -138,7 +122,6 @@
     .dark-mode .card {
       background-color: #1e1e1e;
       border-color: #333;
-      box-shadow: 0 0 15px rgba(255,255,255,0.05);
     }
 
     .dark-mode nav {
@@ -166,35 +149,13 @@
     }
 
     @keyframes sparkleFade {
-      from {
-        opacity: 1;
-        transform: scale(1);
-      }
-      to {
-        opacity: 0;
-        transform: scale(1.8);
-      }
-    }
-
-    .leaf {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/4/47/Leaf_icon_2.svg') no-repeat center center / contain;
-      animation: fall 6s linear infinite;
-      pointer-events: none;
-      z-index: 9998;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(1.8); }
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Ayati's Web World</h1>
     <p id="typewriter"></p>
@@ -246,13 +207,26 @@
         <p>It finally worked! After fixing my file names and GitHub settings, I got my site live. Now I can share my projects with the world 🌍.</p>
       </div>
     </div>
+  </div>
 
   <footer>
     &copy; 2025 Ayati | Made with 💙 and 🌲
   </footer>
 
   <script>
-    const colors = ["#e6f7ff", "#ffe6e6", "#e6ffe6", "#fff0f5", "#f0f0f0", "#014d4e", "#2a3439", "#722f37", "#1c2b2d"];
+    const colors = [
+      "#e6f7ff", "#ffe6e6", "#e6ffe6", "#fff0f5", "#f0f0f0",
+      "#014d4e", "#2a3439", "#722f37", "#1c2b2d", "#ff6b6b",
+      "#00bcd4", "#fff176", "#7ed957", "#da70d6", "#f08080",
+      "#afeeee", "#fffacd", "#ffe4e1", "#eee8aa", "#00ffff",
+      "#ff69b4", "#b0e0e6", "#add8e6", "#c1f0dc", "#deb887",
+      "#8fbc8f", "#f5deb3", "#ffb6c1", "#a29bfe", "#ffe4b5",
+      "#98fb98", "#dcdcdc", "#e0ffff", "#ffdead", "#e9967a",
+      "#d8bfd8", "#fdf5e6", "#f0fff0", "#e6e6fa", "#ffd700",
+      "#90ee90", "#ffa07a", "#fafad2", "#ffe4c4", "#d2b48c",
+      "#f0e68c", "#e0b0ff", "#cfcfcf", "#40e0d0", "#ffcccb",
+      "#c6ecc6", "#d9d2e9", "#EFEBD8"
+    ];
 
     function changeBackground() {
       const c = colors[Math.floor(Math.random() * colors.length)];
@@ -274,15 +248,28 @@
     }
     window.onload = typeWriter;
 
-    document.addEventListener("mousemove", function(e) {
-      if (!fairyMode) return;
-      const sparkle = document.createElement("div");
-      sparkle.className = "sparkle";
-      sparkle.style.left = `${e.pageX - 4}px`;
-      sparkle.style.top = `${e.pageY - 4}px`;
-      document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 800);
-    });
+    let fairyMode = false;
+    let sparkleHandler = null;
+
+    function toggleFairyMode() {
+      fairyMode = !fairyMode;
+
+      if (fairyMode) {
+        sparkleHandler = function(e) {
+          const sparkle = document.createElement("div");
+          sparkle.className = "sparkle";
+          sparkle.style.left = `${e.pageX - 4}px`;
+          sparkle.style.top = `${e.pageY - 4}px`;
+          document.body.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 800);
+        };
+        document.addEventListener("mousemove", sparkleHandler);
+        document.body.style.backgroundImage = "radial-gradient(circle at center, #fefefe, #d0e7ff)";
+      } else {
+        document.removeEventListener("mousemove", sparkleHandler);
+        document.body.style.backgroundImage = "";
+      }
+    }
 
     function startDiscoMode() {
       let discoInterval = setInterval(() => {
@@ -291,35 +278,13 @@
         document.body.style.backgroundColor = bg;
         document.body.style.color = textColor;
       }, 300);
+
       setTimeout(() => clearInterval(discoInterval), 8000);
-    }
-
-    let fairyMode = false;
-    function toggleFairyMode() {
-      fairyMode = !fairyMode;
-      if (fairyMode) {
-        generateLeaves();
-      }
-    }
-
-    function generateLeaves() {
-      for (let i = 0; i < 15; i++) {
-        const leaf = document.createElement("div");
-        leaf.className = "leaf";
-        leaf.style.left = `${Math.random() * 100}vw`;
-        leaf.style.top = `-${Math.random() * 20}px`;
-        leaf.style.animationDuration = `${4 + Math.random() * 4}s`;
-        document.body.appendChild(leaf);
-        setTimeout(() => leaf.remove(), 6000);
-      }
-      if (fairyMode) setTimeout(generateLeaves, 2000);
     }
   </script>
 </body>
 </html>
 
-    
-   
  
      
  
