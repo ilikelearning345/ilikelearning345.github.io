@@ -51,9 +51,9 @@
     }
 
     .fairy-background {
-      background-image: url('https://i.ibb.co/ZJr4K1T/fairy-leaves.png');
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
       background-repeat: repeat;
-      background-size: 200px;
+      background-size: cover;
       transition: background 0.5s ease-in-out;
     }
 
@@ -175,7 +175,9 @@
       <button onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
       <button onclick="startDiscoMode()">🪩 Disco Mode</button>
       <button onclick="toggleFairyMode()">🧚 Fairy Mode</button>
-      <button onclick="toggleTrailMode()">🌈 Trail Mode</button>
+      <button onclick="toggleTrailMode()">🌈 Trail Mode</button><br/>
+      <label>Trail Color: </label>
+      <input type="color" id="trailColorPicker" value="#ff69b4" title="Pick your trail color!">
     </div>
 
     <div class="card">
@@ -248,8 +250,8 @@
     function sparkleTrail(e) {
       const sparkle = document.createElement("div");
       sparkle.className = "sparkle";
-      sparkle.style.left = ${e.pageX - 4}px;
-      sparkle.style.top = ${e.pageY - 4}px;
+      sparkle.style.left = `${e.pageX - 4}px`;
+      sparkle.style.top = `${e.pageY - 4}px`;
       document.body.appendChild(sparkle);
       setTimeout(() => sparkle.remove(), 800);
     }
@@ -267,9 +269,10 @@
     function rainbowTrail(e) {
       const dot = document.createElement("div");
       dot.className = "trail-dot";
-      dot.style.left = ${e.pageX}px;
-      dot.style.top = ${e.pageY}px;
-      dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      dot.style.left = `${e.pageX - 4}px`;
+      dot.style.top = `${e.pageY - 4}px`;
+      const selectedColor = document.getElementById("trailColorPicker")?.value || "pink";
+      dot.style.backgroundColor = selectedColor;
       document.body.appendChild(dot);
       setTimeout(() => dot.remove(), 1000);
     }
@@ -287,8 +290,8 @@
 </body>
 </html>
 
- 
-     
+
+   
  
 
     
