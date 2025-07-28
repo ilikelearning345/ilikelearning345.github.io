@@ -17,29 +17,37 @@
       background-color: #f0f8ff;
       color: #222;
       transition: all 0.6s ease;
+      overflow-x: hidden;
     }
 
-    .sparkle {
+    .sparkle, .trail-dot {
       position: fixed;
       width: 8px;
       height: 8px;
-      background: white;
       border-radius: 50%;
       pointer-events: none;
-      animation: sparkleFade 0.8s linear forwards;
       z-index: 9999;
+    }
+
+    .sparkle {
+      background: radial-gradient(white, rgba(255,255,255,0));
       box-shadow: 0 0 8px 4px white;
+      animation: sparkleFade 0.8s linear forwards;
     }
 
     @keyframes sparkleFade {
-      from {
-        opacity: 1;
-        transform: scale(1);
-      }
-      to {
-        opacity: 0;
-        transform: scale(1.8);
-      }
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(1.8); }
+    }
+
+    .trail-dot {
+      background: pink;
+      opacity: 0.8;
+      animation: trailFade 1s ease-out forwards;
+    }
+
+    @keyframes trailFade {
+      to { opacity: 0; transform: scale(2); }
     }
 
     .fairy-background {
@@ -118,16 +126,17 @@
       border-color: #333;
     }
 
-    .dark-mode nav {
+    .dark-mode nav, .dark-mode footer {
       background-color: #333;
     }
 
-    .dark-mode nav a:hover {
-      background-color: #555;
-    }
-
-    .dark-mode footer {
-      background-color: #333;
+    textarea {
+      width: 90%;
+      height: 100px;
+      resize: none;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -166,11 +175,14 @@
       <button onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
       <button onclick="startDiscoMode()">🪩 Disco Mode</button>
       <button onclick="toggleFairyMode()">🧚 Fairy Mode</button>
+      <button onclick="toggleTrailMode()">🌈 Trail Mode</button>
     </div>
 
     <div class="card">
-      <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:heyayati@gmail.com">heyayati@gmail.com</a></p>
+      <h2>Feedback 💬</h2>
+      <p>Got something to say?</p>
+      <textarea placeholder="Type your thoughts here..."></textarea><br/>
+      <button onclick="alert('Thank you for your feedback! 💌')">Send Feedback</button>
     </div>
 
     <div class="card">
@@ -220,11 +232,11 @@
     window.onload = typeWriter;
 
     let fairyModeOn = false;
+    let trailModeOn = false;
 
     function toggleFairyMode() {
       fairyModeOn = !fairyModeOn;
       document.body.classList.toggle("fairy-background", fairyModeOn);
-
       if (fairyModeOn) {
         document.addEventListener("mousemove", sparkleTrail);
       } else {
@@ -242,6 +254,26 @@
       setTimeout(() => sparkle.remove(), 800);
     }
 
+    function toggleTrailMode() {
+      trailModeOn = !trailModeOn;
+      if (trailModeOn) {
+        document.addEventListener("mousemove", rainbowTrail);
+      } else {
+        document.removeEventListener("mousemove", rainbowTrail);
+        document.querySelectorAll(".trail-dot").forEach(dot => dot.remove());
+      }
+    }
+
+    function rainbowTrail(e) {
+      const dot = document.createElement("div");
+      dot.className = "trail-dot";
+      dot.style.left = `${e.pageX}px`;
+      dot.style.top = `${e.pageY}px`;
+      dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(dot);
+      setTimeout(() => dot.remove(), 1000);
+    }
+
     function startDiscoMode() {
       let discoInterval = setInterval(() => {
         const bg = colors[Math.floor(Math.random() * colors.length)];
@@ -254,7 +286,6 @@
   </script>
 </body>
 </html>
-
 
  
      
