@@ -4,98 +4,174 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ayati's Forest Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --silk-blue: #3c9ecf;
+      --matte-green: #2b4738;
+    }
+
     body {
-      font-family: 'Comic Sans MS', cursive;
       margin: 0;
-      padding: 0;
-      text-align: center;
-      background-color: #e6ffe6;
-      transition: background-color 0.5s, color 0.5s;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f0f8ff;
+      color: #222;
+      transition: background-color 1s ease;
     }
 
-    .dark-mode {
-      background-color: #1e1e1e;
-      color: #f1f1f1;
+    body.dark-mode {
+      background-color: #121212;
+      color: #f5f5f5;
     }
 
-    .fairy-background {
-      background-image: url('https://images.unsplash.com/photo-1605648916319-027ff49760a1?auto=format&fit=crop&w=1280&q=80');
+    header {
+      background: url('https://cdn.pixabay.com/photo/2023/09/06/23/48/mushrooms-8238001_1280.jpg') no-repeat center center;
       background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
     }
 
-    h1 {
-      padding-top: 20px;
-      font-size: 2.5rem;
-      color: #2e8b57;
+    header h1 {
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+
+    nav {
+      background-color: var(--matte-green);
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: var(--silk-blue);
+    }
+
+    .container {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .card {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 30px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     button {
-      margin: 10px;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 10px;
+      background-color: var(--silk-blue);
+      color: white;
       border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
       cursor: pointer;
-      background-color: #7ed957;
-      color: #fff;
-      transition: background-color 0.3s;
+      font-size: 16px;
+      margin: 5px;
     }
 
-    button:hover {
-      background-color: #5fb947;
-    }
-
-    .sparkle, .trail-dot {
-      position: absolute;
-      pointer-events: none;
-      z-index: 9999;
-      border-radius: 50%;
-      width: 8px;
-      height: 8px;
-    }
-
-    .sparkle {
-      background-color: white;
-      box-shadow: 0 0 6px #fff, 0 0 10px #fff;
+    footer {
+      background-color: var(--matte-green);
+      color: white;
+      padding: 10px;
+      margin-top: 40px;
+      text-align: center;
     }
 
     .trail-dot {
-      opacity: 0.8;
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      width: 8px;
+      height: 8px;
+      z-index: 9999;
+      transition: transform 0.1s ease-out;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .card {
+        width: 95%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Ayati's Forest Portfolio</h1>
-  <p id="typewriter"></p>
 
-  <div>
-    <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-    <button onclick="toggleFairyMode()">🧚 Fairy Mode</button>
-    <button onclick="toggleTrailMode()">🌈 Trail Mode</button>
-    <button onclick="startDiscoMode()">🎉 Disco Mode</button>
+  <header>
+    <h1>Ayati's Forest Portfolio</h1>
+    <p id="typewriter"></p>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Projects</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h2>About Me</h2>
+      <p>Hi! I’m Ayati, a 12-year-old learning to design websites. Now adding JavaScript fun!</p>
+    </div>
+
+    <div class="card">
+      <h2>Projects</h2>
+      <ul style="text-align: left;">
+        <li><a href="letssee.html" target="_blank">✔ javascript</a></li>
+        <li><a href="html.html" target="_blank">✔working paper</a></li>
+        <li><a href="cssdoc.html" target="_blank">✔ forty</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Change the Mood!</h2>
+      <p>Click a button below to play with the vibe!</p>
+      <button onclick="changeBackground()">🎨 Change Background</button>
+      <button onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
+      <button onclick="toggleFairyMode()">🌟 Fairy Mode</button>
+      <button onclick="toggleTrailMode()">✨ Trail Mode</button>
+      <input type="color" id="trailColorPicker" value="#ff69b4" style="margin-top:10px; display:none;">
+    </div>
+
+    <div class="card">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:heyayati@gmail.com">heyayati@gmail.com</a></p>
+    </div>
   </div>
 
-  <div style="margin-top: 10px;">
-    <label><strong>Choose Trail Color:</strong></label>
-    <input type="color" id="trailColorPicker" value="#ff69b4" onchange="trailColor = this.value" />
-  </div>
+  <footer>
+    &copy; 2025 Ayati | Made with 💙 and 🌲
+  </footer>
 
   <script>
     const colors = [
       "#e6f7ff", "#ffe6e6", "#e6ffe6", "#fff0f5", "#f0f0f0",
-      "#014d4e", "#2a3439", "#722f37", "#1c2b2d", "#ff6b6b",
-      "#00bcd4", "#fff176", "#7ed957", "#da70d6", "#f08080",
-      "#afeeee", "#fffacd", "#ffe4e1", "#eee8aa", "#00ffff",
-      "#ff69b4", "#b0e0e6", "#add8e6", "#c1f0dc", "#deb887"
+      "#014d4e", "#2a3439", "#722f37", "#1c2b2d", "#ff6b6b"
     ];
+
+    function changeBackground() {
+      const c = colors[Math.floor(Math.random() * colors.length)];
+      document.body.style.backgroundColor = c;
+    }
 
     function toggleDarkMode() {
       document.body.classList.toggle("dark-mode");
     }
 
+    // Typewriter
     const text = "Nature-themed web designer in training 🌿";
     let i = 0;
     function typeWriter() {
@@ -107,61 +183,7 @@
     }
     window.onload = typeWriter;
 
-    let fairyModeOn = false;
-    let trailModeOn = false;
-    let trailColor = document.getElementById("trailColorPicker").value;
-
+    // Fairy Mode
+    let fairyOn = false;
     function toggleFairyMode() {
-      fairyModeOn = !fairyModeOn;
-      document.body.classList.toggle("fairy-background", fairyModeOn);
-      if (fairyModeOn) {
-        document.addEventListener("mousemove", sparkleTrail);
-      } else {
-        document.removeEventListener("mousemove", sparkleTrail);
-        document.querySelectorAll(".sparkle").forEach(s => s.remove());
-      }
-    }
-
-    function sparkleTrail(e) {
-      const sparkle = document.createElement("div");
-      sparkle.className = "sparkle";
-      sparkle.style.left = `${e.clientX - 4}px`;
-      sparkle.style.top = `${e.clientY - 4}px`;
-      document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 800);
-    }
-
-    function toggleTrailMode() {
-      trailModeOn = !trailModeOn;
-      if (trailModeOn) {
-        document.addEventListener("mousemove", rainbowTrail);
-      } else {
-        document.removeEventListener("mousemove", rainbowTrail);
-        document.querySelectorAll(".trail-dot").forEach(dot => dot.remove());
-      }
-    }
-
-    function rainbowTrail(e) {
-      const dot = document.createElement("div");
-      dot.className = "trail-dot";
-      dot.style.left = `${e.clientX - 4}px`;
-      dot.style.top = `${e.clientY - 4}px`;
-      dot.style.backgroundColor = trailColor;
-      document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 600);
-    }
-
-    function startDiscoMode() {
-      let discoInterval = setInterval(() => {
-        const bg = colors[Math.floor(Math.random() * colors.length)];
-        const textColor = colors[Math.floor(Math.random() * colors.length)];
-        document.body.style.backgroundColor = bg;
-        document.body.style.color = textColor;
-      }, 300);
-      setTimeout(() => clearInterval(discoInterval), 8000);
-    }
-  </script>
-</body>
-</html>
-
-    
+      const header = document.querySelec
