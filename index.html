@@ -6,79 +6,66 @@
   <title>Ayati's Forest Portfolio</title>
   <style>
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      transition: background 0.3s ease;
       overflow-x: hidden;
-      transition: background 0.5s ease-in-out;
     }
 
     header {
-      background: #8BC34A;
+      background-color: #4a7c59;
       color: white;
-      padding: 10px;
+      padding: 1rem;
       text-align: center;
     }
 
-    .mode-buttons {
-      text-align: center;
-      margin: 20px;
+    main {
+      padding: 2rem;
     }
 
     button {
-      margin: 5px;
-      padding: 10px 15px;
+      margin: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 8px;
       border: none;
-      border-radius: 10px;
       cursor: pointer;
-      font-size: 16px;
     }
 
     .dark-mode {
-      background: #121212;
+      background-color: #121212;
       color: white;
+    }
+
+    .disco-mode {
+      animation: disco 1s infinite;
+    }
+
+    @keyframes disco {
+      0% { background-color: red; }
+      25% { background-color: yellow; }
+      50% { background-color: lime; }
+      75% { background-color: blue; }
+      100% { background-color: purple; }
     }
 
     .fairy-background {
       background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
-      background-repeat: repeat;
+      background-repeat: no-repeat;
       background-size: cover;
-      transition: background 0.5s ease-in-out;
     }
 
     .trail-dot {
-      position: absolute;
       width: 8px;
       height: 8px;
       border-radius: 50%;
+      position: absolute;
       pointer-events: none;
-      z-index: 1000;
+      z-index: 9999;
     }
 
     .color-picker {
-      text-align: center;
-      margin-top: 10px;
-      display: none;
-    }
-
-    .sparkle {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      pointer-events: none;
-      animation: sparkleFade 1s forwards;
-    }
-
-    @keyframes sparkleFade {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(2); opacity: 0; }
-    }
-
-    main {
-      padding: 20px;
+      margin-left: 10px;
     }
   </style>
 </head>
@@ -87,104 +74,81 @@
     <h1>Ayati's Forest Portfolio</h1>
   </header>
 
-  <div class="mode-buttons">
+  <main>
+    <p>Welcome to my magical forest! Choose a mode:</p>
     <button onclick="toggleDarkMode()">Dark Mode</button>
+    <button onclick="toggleDiscoMode()">Disco Mode</button>
     <button onclick="toggleFairyMode()">Fairy Mode</button>
     <button onclick="toggleTrailMode()">Trail Mode</button>
-    <button onclick="toggleDiscoMode()">Disco Mode</button>
-  </div>
-
-  <div class="color-picker" id="colorPickerContainer">
-    <label for="trailColor">Choose Trail Color:</label>
-    <input type="color" id="trailColor" value="#ff00ff" />
-  </div>
-
-  <main>
-    <p>Welcome to my magical forest-themed portfolio. Explore the different modes and enjoy the experience!</p>
+    <label class="color-picker">
+      Pick Trail Color:
+      <input type="color" id="trailColorPicker" value="#ff00ff">
+    </label>
   </main>
 
   <script>
-    let darkModeOn = false;
-    let fairyModeOn = false;
+    let isDark = false;
+    let isDisco = false;
+    let isFairy = false;
     let trailModeOn = false;
-    let discoModeOn = false;
     let sparkleInterval;
 
     function toggleDarkMode() {
-      darkModeOn = !darkModeOn;
-      document.body.classList.toggle('dark-mode', darkModeOn);
+      document.body.classList.toggle("dark-mode");
+      isDark = !isDark;
+    }
+
+    function toggleDiscoMode() {
+      document.body.classList.toggle("disco-mode");
+      isDisco = !isDisco;
     }
 
     function toggleFairyMode() {
-      fairyModeOn = !fairyModeOn;
-      if (fairyModeOn) {
-        document.body.classList.add('fairy-background');
-        document.addEventListener("mousemove", sparkleTrail);
-        sparkleInterval = setInterval(() => {}, 100);
+      isFairy = !isFairy;
+      if (isFairy) {
+        document.body.classList.add("fairy-background");
+        sparkleInterval = setInterval(createSparkle, 200);
       } else {
-        document.body.classList.remove('fairy-background');
-        document.removeEventListener("mousemove", sparkleTrail);
+        document.body.classList.remove("fairy-background");
         clearInterval(sparkleInterval);
+        document.querySelectorAll(".sparkle").forEach(s => s.remove());
       }
     }
 
-    function sparkleTrail(e) {
+    function createSparkle() {
       const sparkle = document.createElement("div");
       sparkle.className = "sparkle";
-      sparkle.style.left = `${e.clientX}px`;
-      sparkle.style.top = `${e.clientY}px`;
+      sparkle.textContent = "✨";
+      sparkle.style.position = "absolute";
+      sparkle.style.left = (event.clientX + Math.random() * 20 - 10) + "px";
+      sparkle.style.top = (event.clientY + Math.random() * 20 - 10) + "px";
+      sparkle.style.fontSize = "16px";
+      sparkle.style.pointerEvents = "none";
+      sparkle.style.zIndex = 9999;
       document.body.appendChild(sparkle);
       setTimeout(() => sparkle.remove(), 1000);
     }
 
     function toggleTrailMode() {
       trailModeOn = !trailModeOn;
-      const picker = document.getElementById('colorPickerContainer');
       if (trailModeOn) {
-        picker.style.display = "block";
-        document.addEventListener("mousemove", colorTrail);
+        document.addEventListener("mousemove", rainbowTrail);
       } else {
-        picker.style.display = "none";
-        document.removeEventListener("mousemove", colorTrail);
+        document.removeEventListener("mousemove", rainbowTrail);
         document.querySelectorAll(".trail-dot").forEach(dot => dot.remove());
       }
     }
 
-    function colorTrail(e) {
-      const color = document.getElementById("trailColor").value;
+    function rainbowTrail(e) {
       const dot = document.createElement("div");
       dot.className = "trail-dot";
       dot.style.left = `${e.clientX - 4}px`;
       dot.style.top = `${e.clientY - 4}px`;
-      dot.style.backgroundColor = color;
+      dot.style.backgroundColor = document.getElementById("trailColorPicker").value;
       document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 500);
-    }
-
-    function toggleDiscoMode() {
-      discoModeOn = !discoModeOn;
-      if (discoModeOn) {
-        startDisco();
-      } else {
-        clearInterval(discoInterval);
-        document.body.style.backgroundColor = '';
-      }
-    }
-
-    let discoInterval;
-    function startDisco() {
-      const colors = ['red', 'blue', 'green', 'purple', 'yellow', 'orange', 'pink'];
-      discoInterval = setInterval(() => {
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        document.body.style.backgroundColor = randomColor;
-      }, 300);
+      setTimeout(() => dot.remove(), 400);
     }
   </script>
 </body>
 </html>
 
-     
-     
-        
-     
-   
