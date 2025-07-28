@@ -41,8 +41,7 @@
     }
 
     .trail-dot {
-      background: pink;
-      opacity: 0.8;
+      opacity: 0.9;
       animation: trailFade 1s ease-out forwards;
     }
 
@@ -138,12 +137,16 @@
       font-size: 16px;
       border-radius: 5px;
     }
+
+    .color-picker {
+      margin: 10px;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Ayati's Web World</h1>
+    <h1>Ayati's Forest Portfolio</h1>
     <p id="typewriter"></p>
   </header>
 
@@ -175,7 +178,9 @@
       <button onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
       <button onclick="startDiscoMode()">🪩 Disco Mode</button>
       <button onclick="toggleFairyMode()">🧚 Fairy Mode</button>
-      <button onclick="toggleTrailMode()">🌈 Trail Mode</button>
+      <button onclick="toggleTrailMode()">🌈 Trail Mode</button><br>
+      <label for="trailColor">Choose Trail Color:</label>
+      <input type="color" id="trailColor" class="color-picker" value="#ff69b4">
     </div>
 
     <div class="card">
@@ -267,9 +272,10 @@
     function rainbowTrail(e) {
       const dot = document.createElement("div");
       dot.className = "trail-dot";
-      dot.style.left = `${e.pageX}px`;
-      dot.style.top = `${e.pageY}px`;
-      dot.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      dot.style.left = `${e.pageX - 4}px`;
+      dot.style.top = `${e.pageY - 4}px`;
+      const color = document.getElementById("trailColor").value;
+      dot.style.backgroundColor = color;
       document.body.appendChild(dot);
       setTimeout(() => dot.remove(), 1000);
     }
@@ -287,11 +293,5 @@
 </body>
 </html>
 
- 
-     
- 
-
     
-    
-    
-       
+   
