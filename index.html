@@ -49,12 +49,13 @@
       to { opacity: 0; transform: scale(2); }
     }
 
-    .fairy-background {
-      background-image: url('https://i.ibb.co/ZJr4K1T/fairy-leaves.png');
-      background-repeat: repeat;
-      background-size: 200px;
-      transition: background 0.5s ease-in-out;
-    }
+   .fairy-background {
+  background-image: url('https://i.imgur.com/M8nRkfu.png'); /* New working fairy leaves */
+  background-repeat: repeat;
+  background-size: 200px;
+  transition: background 0.5s ease-in-out;
+}
+
 
     header {
       background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') no-repeat center center;
@@ -250,15 +251,7 @@
       }
     }
 
-    function sparkleTrail(e) {
-      const sparkle = document.createElement("div");
-      sparkle.className = "sparkle";
-      sparkle.style.left = `${e.pageX - 4}px`;
-      sparkle.style.top = `${e.pageY - 4}px`;
-      document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 800);
-    }
-
+   
     function toggleTrailMode() {
       trailModeOn = !trailModeOn;
       if (trailModeOn) {
@@ -270,15 +263,15 @@
     }
 
     function rainbowTrail(e) {
-      const dot = document.createElement("div");
-      dot.className = "trail-dot";
-      dot.style.left = `${e.pageX - 4}px`;
-      dot.style.top = `${e.pageY - 4}px`;
-      const color = document.getElementById("trailColor").value;
-      dot.style.backgroundColor = color;
-      document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 1000);
-    }
+  const dot = document.createElement("div");
+  dot.className = "trail-dot";
+  dot.style.left = `${e.clientX - 4}px`; // exactly centered
+  dot.style.top = `${e.clientY - 4}px`;
+  dot.style.backgroundColor = selectedTrailColor || colors[Math.floor(Math.random() * colors.length)];
+  document.body.appendChild(dot);
+  setTimeout(() => dot.remove(), 400); // quick trail
+}
+
 
     function startDiscoMode() {
       let discoInterval = setInterval(() => {
